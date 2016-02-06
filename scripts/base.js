@@ -33,3 +33,15 @@ function Background(src) {
 		},
 	});
 };
+
+function Field(name, element) {
+	var div_element = document.createElement("div");
+	BaseObject.call(this, div_element);
+	div_element.style.fontFamily = "Arial";
+	var label = document.createElement("label");
+	label.innerHTML = name;
+	label.style.display = "block";
+	label.style.fontWeight = "bold";
+	div_element.appendChild(label);
+	div_element.appendChild(element);
+};

@@ -5,9 +5,16 @@ function BaseObject(element, kwargs) {
 	if (!kwargs.parent) {
 		kwargs.parent = document.body;
 	};
+	element.field = this;
 	kwargs.parent.appendChild(element);
+	delete element.field;
 	this.remove = function() {
 		kwargs.parent.removeChild(element);
+	};
+	this.show = function() {
+		element.field = this;
+		kwargs.parent.appendChild(element);
+		delete element.field;
 	};
 };
 
@@ -46,9 +53,7 @@ function Field(name, element, kwargs) {
 	};
 	this.id = name.toLowerCase();
 	var div_element = document.createElement("div");
-	div_element.field = this;
 	BaseObject.call(this, div_element, {parent: kwargs.parent});
-	delete div_element.field;
 	div_element.style.fontFamily = "Arial";
 	var label = document.createElement("label");
 	label.innerHTML = name;
@@ -70,5 +75,8 @@ function Fieldset(name) {
 	this.appendChild = function(child) {
 		element.appendChild(child);
 		this[child.field.id] = child.field;
+	};
+	this.removeChild = function(child) {
+		element.removeChild(child);
 	};
 };

@@ -61,8 +61,11 @@ function Field(name, element, kwargs) {
 function Fieldset(name) {
 	var element = document.createElement("fieldset");
 	BaseObject.call(this, element);
+	element.style.fontFamily = "Arial";
 	var legend = document.createElement("legend");
 	legend.innerHTML = name;
+	legend.style.fontWeight = "bold";
+	legend.style.fontSize = "x-large";
 	element.appendChild(legend);
 	this.appendChild = function(child) {
 		element.appendChild(child);

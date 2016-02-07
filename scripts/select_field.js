@@ -13,7 +13,7 @@ function SelectField(name, options, kwargs) {
 	this.select = function(option) {
 		options[option].call();
 	};
-	that = this;
+	var that = this;
 	element.addEventListener("change", function() {
 		that.select(element.value);
 	});

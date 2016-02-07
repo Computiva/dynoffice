@@ -61,6 +61,9 @@ function Field(name, element, kwargs) {
 	label.style.fontWeight = "bold";
 	div_element.appendChild(label);
 	div_element.appendChild(element);
+	element.addEventListener("change", function(event) {
+		updateAutoTexts();
+	});
 };
 
 function Fieldset(name) {

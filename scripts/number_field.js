@@ -13,9 +13,10 @@ function NumberField(name, kwargs) {
 	Object.defineProperty(this, "value", {
 		set: function(value) {
 			element.value = value;
+			updateAutoTexts();
 		},
 		get: function() {
-			return element.value;
+			return parseFloat(element.value);
 		},
 	});
 };

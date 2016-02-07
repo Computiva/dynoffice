@@ -1,6 +1,6 @@
 QUnit.module("TextField", function(hooks) {
 	QUnit.test("It can be initialized with a value.", function(assert) {
-		var text_field = new TextField("Name", "Richard");
+		var text_field = new TextField("Name", {initial_value: "Richard"});
 		assert.equal(text_field.value, "Richard");
 		text_field.remove();
 	});

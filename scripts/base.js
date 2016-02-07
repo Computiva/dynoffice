@@ -1,7 +1,13 @@
-function BaseObject(element) {
-	document.body.appendChild(element);
+function BaseObject(element, kwargs) {
+	if (!kwargs) {
+		var kwargs = new Object();
+	};
+	if (!kwargs.parent) {
+		kwargs.parent = document.body;
+	};
+	kwargs.parent.appendChild(element);
 	this.remove = function() {
-		document.body.removeChild(element);
+		kwargs.parent.removeChild(element);
 	};
 };
 
@@ -34,9 +40,15 @@ function Background(src) {
 	});
 };
 
-function Field(name, element) {
+function Field(name, element, kwargs) {
+	if (!kwargs) {
+		var kwargs = new Object();
+	};
+	this.id = name.toLowerCase();
 	var div_element = document.createElement("div");
-	BaseObject.call(this, div_element);
+	div_element.field = this;
+	BaseObject.call(this, div_element, {parent: kwargs.parent});
+	delete div_element.field;
 	div_element.style.fontFamily = "Arial";
 	var label = document.createElement("label");
 	label.innerHTML = name;
@@ -44,4 +56,16 @@ function Field(name, element) {
 	label.style.fontWeight = "bold";
 	div_element.appendChild(label);
 	div_element.appendChild(element);
+};
+
+function Fieldset(name) {
+	var element = document.createElement("fieldset");
+	BaseObject.call(this, element);
+	var legend = document.createElement("legend");
+	legend.innerHTML = name;
+	element.appendChild(legend);
+	this.appendChild = function(child) {
+		element.appendChild(child);
+		this[child.field.id] = child.field;
+	};
 };

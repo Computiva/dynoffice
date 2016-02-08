@@ -22,6 +22,7 @@ function Background(src) {
 	var element = new Image();
 	BaseObject.call(this, element);
 	element.src = src;
+	element.id = "background";
 	element.style.position = "fixed";
 	element.style.top = 0;
 	element.style.left = 0;
@@ -83,6 +84,19 @@ function Fieldset(name) {
 		element.removeChild(child);
 	};
 };
+
+function createPrintCSS() {
+	var stylesheet = document.createElement("style");
+	stylesheet.media = "print";
+	stylesheet.innerHTML += "button { display: none }";
+	stylesheet.innerHTML += "img#background { display: none }";
+	stylesheet.innerHTML += "input[type=text] { border-width: 0 }";
+	stylesheet.innerHTML += "input[type=number] { border-width: 0 }";
+	stylesheet.innerHTML += "select { border-width: 0 }";
+	document.head.appendChild(stylesheet);
+};
+
+createPrintCSS();
 
 if (!window.updateAutoTexts) {
 	window.updateAutoTexts = function() {};

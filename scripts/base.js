@@ -78,7 +78,24 @@ function Fieldset(name) {
 	element.appendChild(legend);
 	this.appendChild = function(child) {
 		element.appendChild(child);
-		this[child.field.id] = child.field;
+		if (child.field) {
+			this[child.field.id] = child.field;
+		};
+	};
+	this.removeChild = function(child) {
+		element.removeChild(child);
+	};
+};
+
+function Header() {
+	var element = document.createElement("header");
+	BaseObject.call(this, element);
+	element.style.fontFamily = "Arial";
+	this.appendChild = function(child) {
+		element.appendChild(child);
+		if (child.field) {
+			this[child.field.id] = child.field;
+		};
 	};
 	this.removeChild = function(child) {
 		element.removeChild(child);

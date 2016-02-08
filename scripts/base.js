@@ -83,3 +83,7 @@ function Fieldset(name) {
 		element.removeChild(child);
 	};
 };
+
+if (!window.updateAutoTexts) {
+	window.updateAutoTexts = function() {};
+};

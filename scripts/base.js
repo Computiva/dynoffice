@@ -32,18 +32,24 @@ function Field(name, element, kwargs) {
 	if (!kwargs) {
 		var kwargs = new Object();
 	};
-	this.id = name.toLowerCase();
+	if (!kwargs.id) {
+		kwargs.id = name.toLowerCase().replace(" ", "_");
+	};
 	var div_element = document.createElement("div");
-	BaseObject.call(this, div_element, {parent: kwargs.parent});
-	div_element.style.fontFamily = "Arial";
+	BaseObject.call(this, div_element, kwargs);
 	var label = document.createElement("label");
 	label.innerHTML = name;
 	label.style.display = "block";
 	label.style.fontWeight = "bold";
 	div_element.appendChild(label);
 	div_element.appendChild(element);
-	element.addEventListener("change", function(event) {
-		updateAutoTexts();
+	Object.defineProperty(this, "value", {
+		set: function(value) {
+			element.value = value;
+		},
+		get: function() {
+			return element.value;
+		},
 	});
 };
 

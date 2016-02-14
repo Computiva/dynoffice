@@ -48,4 +48,14 @@ QUnit.module("BaseObject", function(hooks) {
 		assert.equal(element.parentElement, bar);
 		foo.remove();
 	});
+	QUnit.test("Its element id can be specified.", function(assert) {
+		function Foo() {
+			var element = document.createElement("span");
+			BaseObject.call(this, element, {id: "foo"});
+		};
+		var foo = new Foo();
+		var element = document.getElementById("foo");
+		assert.equal(element.tagName, "SPAN");
+		foo.remove();
+	});
 });

@@ -5,6 +5,9 @@ function BaseObject(element, kwargs) {
 	if (!kwargs.parent) {
 		kwargs.parent = document.body;
 	};
+	if (kwargs.id) {
+		element.id = kwargs.id;
+	};
 	kwargs.parent.appendChild(element);
 	element.style.fontFamily = "Arial";
 	this.remove = function() {
@@ -16,9 +19,6 @@ function BaseObject(element, kwargs) {
 };
 
 function Container(element, kwargs) {
-	if (!kwargs) {
-		var kwargs = new Object();
-	};
 	BaseObject.call(this, element, kwargs);
 	this.appendChild = function(child) {
 		element.appendChild(child);

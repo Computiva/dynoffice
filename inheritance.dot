@@ -1,0 +1,15 @@
+digraph inheritance {
+	rankdir=BT;
+	node [shape=box,fontname=Arial];
+	BaseObject [label="BaseObject(\nelement,\nparent=document.body,\nid=null)\n.remove()\n.show()"];
+	Container [label="Container(\nelement)\n.appendChild()\n.removeChild()"];
+	Header [label="Header()"];
+	DynImage [label="DynImage(\nsrc)\n.src"];
+	Background [label="Background(\nsrc)"];
+	Field [label="Field(\nname,\nelement,\nid=name.toLowerCase().replace(\" \", \"_\"))\n.value"];
+	Container -> BaseObject;
+	Header -> Container;
+	DynImage -> BaseObject;
+	Background -> DynImage;
+	Field -> BaseObject;
+}

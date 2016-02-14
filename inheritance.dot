@@ -7,9 +7,11 @@ digraph inheritance {
 	DynImage [label="DynImage(\nsrc)\n.src"];
 	Background [label="Background(\nsrc)"];
 	Field [label="Field(\nname,\nelement,\nid=name.toLowerCase().replace(\" \", \"_\"))\n.value"];
+	TextField [label="TextField(\nname)"];
 	Container -> BaseObject;
 	Header -> Container;
 	DynImage -> BaseObject;
 	Background -> DynImage;
 	Field -> BaseObject;
+	TextField -> Field;
 }

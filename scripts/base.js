@@ -6,11 +6,25 @@ function BaseObject(element, kwargs) {
 		kwargs.parent = document.body;
 	};
 	kwargs.parent.appendChild(element);
+	element.style.fontFamily = "Arial";
 	this.remove = function() {
 		kwargs.parent.removeChild(element);
 	};
 	this.show = function() {
 		kwargs.parent.appendChild(element);
+	};
+};
+
+function Container(element, kwargs) {
+	if (!kwargs) {
+		var kwargs = new Object();
+	};
+	BaseObject.call(this, element, kwargs);
+	this.appendChild = function(child) {
+		element.appendChild(child);
+	};
+	this.removeChild = function(child) {
+		element.removeChild(child);
 	};
 };
 
@@ -85,17 +99,7 @@ function Fieldset(name) {
 
 function Header() {
 	var element = document.createElement("header");
-	BaseObject.call(this, element);
-	element.style.fontFamily = "Arial";
-	this.appendChild = function(child) {
-		element.appendChild(child);
-		if (child.field) {
-			this[child.field.id] = child.field;
-		};
-	};
-	this.removeChild = function(child) {
-		element.removeChild(child);
-	};
+	Container.call(this, element);
 };
 
 function Menu(actions) {

@@ -5,16 +5,12 @@ function BaseObject(element, kwargs) {
 	if (!kwargs.parent) {
 		kwargs.parent = document.body;
 	};
-	element.field = this;
 	kwargs.parent.appendChild(element);
-	delete element.field;
 	this.remove = function() {
 		kwargs.parent.removeChild(element);
 	};
 	this.show = function() {
-		element.field = this;
 		kwargs.parent.appendChild(element);
-		delete element.field;
 	};
 };
 

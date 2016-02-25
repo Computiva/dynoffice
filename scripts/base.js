@@ -28,6 +28,8 @@ function Container(element, kwargs) {
 	};
 };
 
+var fields = new Array();
+
 function Field(name, element, kwargs) {
 	if (!kwargs) {
 		var kwargs = new Object();
@@ -37,6 +39,7 @@ function Field(name, element, kwargs) {
 	};
 	var div_element = document.createElement("div");
 	BaseObject.call(this, div_element, kwargs);
+	fields.push(this);
 	var label = document.createElement("label");
 	label.innerHTML = name;
 	label.style.display = "block";
@@ -171,6 +174,24 @@ function DynWindow() {
 	this.removeChild = function(child) {
 		content.removeChild(child);
 	};
+};
+
+function saveForm() {
+	var field_values = fields.map(function(field) { return field.value; });
+	var download_link = document.createElement("a");
+	download_link.href = "data:text/html,<html><head>";
+	download_link.href += encodeURIComponent(document.head.innerHTML);
+	download_link.href += "<script>";
+	download_link.href += "var field_values = JSON.parse(";
+	download_link.href += encodeURIComponent(JSON.stringify(JSON.stringify(field_values)));	
+	download_link.href += "); for (i in fields) { fields[i].value = field_values[i]; };</script>";
+	download_link.href += "</head><body>";
+	download_link.href += encodeURIComponent(document.body.innerHTML);
+	download_link.href += "</body></html>";
+	download_link.download = "meeting_record.html";
+	document.body.appendChild(download_link);
+	download_link.click();
+	document.body.removeChild(download_link);
 };
 
 function createPrintCSS() {

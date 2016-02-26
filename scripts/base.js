@@ -182,9 +182,9 @@ function saveForm() {
 	download_link.href = "data:text/html,<html><head>";
 	download_link.href += encodeURIComponent(document.head.innerHTML);
 	download_link.href += "<script>";
-	download_link.href += "var field_values = JSON.parse(";
+	download_link.href += "window.addEventListener(\"load\", function() { var field_values = JSON.parse(";
 	download_link.href += encodeURIComponent(JSON.stringify(JSON.stringify(field_values)));	
-	download_link.href += "); for (i in fields) { fields[i].value = field_values[i]; };%3C/script>";
+	download_link.href += "); for (i in fields) { fields[i].value = field_values[i]; }});%3C/script>";
 	download_link.href += "</head></html>";
 	download_link.download = "meeting_record.html";
 	document.body.appendChild(download_link);

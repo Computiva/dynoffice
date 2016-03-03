@@ -1,8 +1,44 @@
 #! /bin/bash
 
+SCRIPT="$1"
+shift
+while [ "$#" -ne 0 ]
+do
+    case "$1" in
+        --images)
+            shift
+            IMAGES_DIR="$1"
+        ;;
+    esac
+    shift
+done
+
 echo '<html>'
 echo '<head>'
 echo '<meta charset="utf-8">'
+if [ ! -z "$IMAGES_DIR" ]
+then
+    echo '<script>'
+    echo 'IMAGES = {'
+    for image_name in $IMAGES_DIR/*
+    do
+        [[ "$image_name" == *.uri ]] && continue
+        if [ ! -f "$image_name.uri" ]
+        then
+            echo -n 'data:' > "$image_name.uri"
+            mimetype "$image_name" | grep -o '[^ ]\+$' | tr -d '\n' >> "$image_name.uri"
+            echo -n ';base64,' >> "$image_name.uri"
+            base64 "$image_name" | tr -d '\n' >> "$image_name.uri"
+        fi
+        echo -n '"'
+        basename "$image_name" | tr -d '\n'
+        echo -n '": "'
+        cat "$image_name.uri"
+        echo '",'
+    done
+    echo '};'
+    echo '</script>'
+fi
 for script_name in /usr/lib/dynoffice/*.js
 do
     echo '<script>'
@@ -10,7 +46,7 @@ do
     echo '</script>'
 done
 echo '<script>'
-cat "$1"
+cat "$SCRIPT"
 echo '</script>'
 echo '</head>'
 echo '</html>'

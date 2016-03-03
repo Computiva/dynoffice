@@ -4,7 +4,7 @@ function DocumentHeader() {
 	var title = document.createElement("h1");
 	title.innerHTML = "Meeting record";
 	this.appendChild(title);
-	var tux = new DynImage("https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png", {id: "tux", parent: this});
+	var tux = new DynImage(IMAGES["Tux.png"], {id: "tux", parent: this});
 	var tux_element = document.getElementById("tux");
 	tux_element.style.width = "50px";
 	tux_element.style.position = "relative";
@@ -14,7 +14,7 @@ function DocumentHeader() {
 };
 window.addEventListener("load", function() {
 	var header = new DocumentHeader();
-	var background = new Background("http://www.wallpaperesia.com/wp-content/uploads/2016/01/Linux-Wallpaper-Perfect-MM15.png");
+	var background = new Background(IMAGES["wallpaper.png"]);
 	var menu = new Menu();
 	var save = new Action("Save", saveForm, {parent: menu});
 	var new_ = new Action("New", function() {}, {parent: menu});

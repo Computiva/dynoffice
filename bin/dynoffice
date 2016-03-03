@@ -1,0 +1,16 @@
+#! /bin/bash
+
+echo '<html>'
+echo '<head>'
+echo '<meta charset="utf-8">'
+for script_name in /usr/lib/dynoffice/*.js
+do
+    echo '<script>'
+    cat "$script_name"
+    echo '</script>'
+done
+echo '<script>'
+cat "$1"
+echo '</script>'
+echo '</head>'
+echo '</html>'

@@ -15,7 +15,10 @@ function DocumentHeader() {
 window.addEventListener("load", function() {
 	var header = new DocumentHeader();
 	var background = new Background("http://www.wallpaperesia.com/wp-content/uploads/2016/01/Linux-Wallpaper-Perfect-MM15.png");
-	var save = new Action("Save", saveForm);
+	var menu = new Menu();
+	var save = new Action("Save", saveForm, {parent: menu});
+	var new_ = new Action("New", function() {}, {parent: menu});
+	var about = new Action("About", function() {}, {parent: menu});
 	var meeting_date = new TextField("Date");
 	meeting_date.value = new Date();
 	var place = new TextField("Place");

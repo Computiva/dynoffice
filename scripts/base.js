@@ -81,35 +81,6 @@ function Header() {
 	Container.call(this, element);
 };
 
-function Menu(actions) {
-	var element = document.createElement("div");
-	BaseObject.call(this, element);
-	element.style.fontFamily = "Arial";
-	element.style.margin = "7px";
-	for (action in actions) {
-		var item = document.createElement("a");
-		item.innerHTML = action;
-		item.style.padding = "7px";
-		item.style.backgroundColor = "white";
-		item.style.borderLeftStyle = "solid";
-		item.style.borderTopStyle = "solid";
-		item.style.borderBottomStyle = "solid";
-		item.style.borderWidth = "1px";
-		item.style.borderColor = "black";
-		item.style.color = "black";
-		item.style.textDecoration = "none";
-		item.style.outline = 0;
-		item.style.cursor = "pointer";
-		element.appendChild(item);
-		item.addEventListener("click", actions[action]);
-	};
-	element.querySelector("a:last-child").style.borderRightStyle = "solid";
-	element.querySelector("a:last-child").style.borderTopRightRadius = "5px";
-	element.querySelector("a:last-child").style.borderBottomRightRadius = "5px";
-	element.querySelector("a:first-child").style.borderTopLeftRadius = "5px";
-	element.querySelector("a:first-child").style.borderBottomLeftRadius = "5px";
-};
-
 function DynWindow() {
 	var element = document.createElement("div");
 	BaseObject.call(this, element);
